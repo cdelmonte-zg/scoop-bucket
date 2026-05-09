@@ -1,0 +1,42 @@
+name: Excavator
+
+on:
+  schedule:
+    - cron: '15 */3 * * *'
+  workflow_dispatch:
+
+jobs:
+  excavate:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Scoop
+        shell: powershell
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+          Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+          "$env:USERPROFILE\scoop\shims" | Out-File -FilePath $env:GITHUB_PATH -Append
+
+      - name: Run checkver and update manifests
+        shell: powershell
+        run: |
+          $scoopRoot = "$env:USERPROFILE\scoop\apps\scoop\current"
+          & "$scoopRoot\bin\checkver.ps1" -Dir "$env:GITHUB_WORKSPACE\bucket" -Update
+
+      - name: Commit and push updates
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add bucket/
+          if git diff --cached --quiet; then
+            echo "No manifest updates."
+          else
+            git commit -m "auto: update manifests"
+            git push
+          fi
