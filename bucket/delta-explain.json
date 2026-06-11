@@ -18,7 +18,7 @@
             "64bit": {
                 "url": "https://github.com/cdelmonte-zg/delta-explain/releases/download/v$version/delta-explain-x86_64-pc-windows-msvc.zip",
                 "hash": {
-                    "url": "$url.sha256"
+                    "url": "https://github.com/cdelmonte-zg/delta-explain/releases/download/v$version/delta-explain-x86_64-pc-windows-msvc.sha256"
                 }
             }
         }
