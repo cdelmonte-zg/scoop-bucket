@@ -1,12 +1,12 @@
 {
-    "version": "0.6.0",
+    "version": "0.7.0",
     "description": "Make Delta pruning visible: CLI for partition pruning and data skipping in Delta Lake.",
     "homepage": "https://github.com/cdelmonte-zg/delta-explain",
     "license": "MIT",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/cdelmonte-zg/delta-explain/releases/download/v0.6.0/delta-explain-x86_64-pc-windows-msvc.zip",
-            "hash": "6a5d460dabcae8c84a65f0061cec57e601edeff744e401439c54c25930971ac3"
+            "url": "https://github.com/cdelmonte-zg/delta-explain/releases/download/v0.7.0/delta-explain-x86_64-pc-windows-msvc.zip",
+            "hash": "a9b566a9a2bb63740517bb2fc7c5891941d802ba5d69bee114fbee7590bc9f6d"
         }
     },
     "bin": "delta-explain.exe",
